@@ -1,0 +1,12 @@
+[theme]
+base="light"
+
+[server]
+runOnSave = true
+
+[pages]
+order = [
+  "Overview.py",
+  "pages/AgentSimulation.py",
+  "pages/Results.py"
+]

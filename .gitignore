@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+venv-skyral/
+
+# macOS system files
+.DS_Store
+
+# IDE/editor files
+.idea/
+.vscode/
+
+# Static build output (from Flask-Frozen)
+build/
+
+# Other ignored files
+*.log
+.env

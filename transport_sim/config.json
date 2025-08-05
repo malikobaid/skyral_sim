@@ -1,0 +1,18 @@
+{
+  "city": "Bournemouth, UK",
+  "hub": "Bournemouth Station",
+  "num_agents": 300,
+  "modes": [
+    "walk"
+  ],
+  "scenarios": {
+    "baseline": {},
+    "tramline_extension": {
+      "add_edge": [
+        21636643,
+        8011033185
+      ],
+      "length": 300
+    }
+  }
+}
