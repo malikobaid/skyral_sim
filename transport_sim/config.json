@@ -1,16 +1,25 @@
 {
-  "city": "Bournemouth, UK",
-  "hub": "Bournemouth Station",
-  "num_agents": 300,
-  "modes": [
-    "walk"
+  "city": "Bournemouth",
+  "tramline": [
+    "Bournemouth Pier",
+    "Southbourne"
   ],
+  "num_agents": 300,
+  "hub": "Bournemouth Station",
+  "traffic": "off-peak",
+  "agent_distribution": {
+    "drive": 63,
+    "cycle": 4,
+    "tram": 33
+  },
+  "sim_date": "2025-08-07",
+  "sim_time": "08:00",
   "scenarios": {
     "baseline": {},
     "tramline_extension": {
       "add_edge": [
-        21636643,
-        8011033185
+        "Bournemouth Pier",
+        "Southbourne"
       ],
       "length": 300
     }

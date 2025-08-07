@@ -1,10 +1,11 @@
 # streamlit_app/pages/AgentSimulation.py
-
-import sys
 import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+import sys
 import json
 from datetime import datetime
 import streamlit as st
+import subprocess
 
 # Adjust path for imports from streamlit_app/
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
@@ -37,44 +38,83 @@ st.subheader("👥 Agent & Simulation Settings")
 num_agents = st.number_input("Number of Agents", min_value=10, max_value=1000, step=10, value=300)
 
 st.markdown("### 🚶 Agent Type Distribution")
-drive_pct = st.slider("🚗 Drive (%)", 0, 100, 40)
+
+# 🟢 Bournemouth-specific default shares from Centre for Cities
+default_drive = 63
+default_cycle = 4
+default_walk = 22
+default_tram = 9
+
+drive_pct = st.slider("🚗 Drive (%)", 0, 100, default_drive)
 remaining = 100 - drive_pct
-cycle_pct = st.slider("🚲 Cycle (%)", 0, remaining, 30)
+cycle_pct = st.slider("🚲 Cycle (%)", 0, remaining, default_cycle)
 tram_pct = 100 - drive_pct - cycle_pct
+
 st.text(f"🚋 Tram (%) will be: {tram_pct}")
 
-# Optional: date and time (can be used in your simulation config later)
+st.caption(
+    "Default modal share from Centre for Cities – "
+    "[Bournemouth city profile](https://www.centreforcities.org/city/bournemouth/)"
+)
+
+# Optional: date and time
 st.subheader("🕒 Simulation Date & Time")
 sim_date = st.date_input("Date", value=datetime.today())
 sim_time = st.time_input("Time", value=datetime.strptime("08:00", "%H:%M").time())
 
+selected_traffic_level = st.selectbox("Traffic Level", ["off-peak", "rush hour"])
+
 # --- 3. Save & Run ---
-if tram_start != tram_end:
-    if st.button("🚀 Save & Run Simulation"):
-        config = {
-            "city": selected_city,
-            "tramline": [tram_start, tram_end],
-            "num_agents": num_agents,
-            "agent_distribution": {
-                "drive": drive_pct,
-                "cycle": cycle_pct,
-                "tram": tram_pct
-            },
-            "sim_date": sim_date.isoformat(),
-            "sim_time": sim_time.strftime("%H:%M"),
-            "scenarios": {
-                "baseline": {},
-                "tramline_extension": {
-                    "add_edge": [tram_start, tram_end],
-                    "length": 300  # Placeholder — you can replace with actual graph length
-                }
+if st.button("🚀 Save & Run Simulation"):
+
+    base_config = {
+        "city": selected_city,
+        "tramline": [tram_start, tram_end],
+        "num_agents": num_agents,
+        "hub": "Bournemouth Station",
+        "agent_distribution": {
+            "drive": drive_pct,
+            "cycle": cycle_pct,
+            "tram": tram_pct
+        },
+        "sim_date": sim_date.isoformat(),
+        "sim_time": sim_time.strftime("%H:%M"),
+        "scenarios": {
+            "baseline": {},
+            "tramline_extension": {
+                "tram_stops": [tram_start, tram_end],
+                "length": 300
             }
         }
+    }
+    resultOk = True
+    error_msgs = []
 
-        with open("transport_sim/config.json", "w") as f:
+    for traffic in ["off-peak", "peak"]:
+        config = base_config.copy()
+        config["traffic"] = traffic
+        config_path = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), "..", "..", f"transport_sim/config_{traffic}.json")
+        )
+        with open(config_path, "w") as f:
             json.dump(config, f, indent=2)
 
-        st.success("✅ Configuration saved and simulation triggered!")
+        with st.spinner(f"Running simulation for {traffic}..."):
+            run_path = os.path.abspath(
+                os.path.join(os.path.dirname(__file__), "..", "..", "transport_sim", "run_sim.py")
+            )
+            result = subprocess.run(["python3", run_path, config_path], capture_output=True, text=True)
+
+        if result.returncode != 0:
+            resultOk = False
+            error_msgs.append(f"❌ {traffic} failed:\n{result.stderr.strip()}")
+
+    if resultOk:
+        st.success("✅ Simulation complete. Please check the Results tab.")
+    else:
+        st.error("❌ One or more simulations failed.")
+        for msg in error_msgs:
+            st.code(msg)
 
 # --- 4. Summary Preview ---
 st.subheader("📋 Configuration Preview")

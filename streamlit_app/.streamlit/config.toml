@@ -6,7 +6,8 @@ runOnSave = true
 
 [pages]
 order = [
-  "Overview.py",
+  "Home.py",
+  "pages/Chatbot.py",
   "pages/AgentSimulation.py",
   "pages/Results.py"
 ]

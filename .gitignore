@@ -23,3 +23,6 @@ build/
 # Other ignored files
 *.log
 .env
+
+# Custom local
+core_sim/

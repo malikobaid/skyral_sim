@@ -1,0 +1,49 @@
+Applied Scientist (Transportation Modelling, Land)
+What We Do:
+The Cities team builds Digital Twins of Cities with a specific focus on providing data
+analytics not just of what is, but of what if scenarios, by modelling how population and
+infrastructure interact in systems such as transport networks and influence the environment,
+economy, policy, and terrain to allow decision makers to see the possible outcomes of their
+plans over systems with large geographic scale and complex requirements.
+We are a multi-disciplinary team working together to build customer solutions from Core
+components (including an application development kit, base models that come with the
+platform, tools to help modellers build models more quickly and tools to help store,
+manage and process data) and customised data and integrations.
+We are seeking an applied scientist to help create and improve these models and
+solutions, and empower our users to leverage synthetic environments and supporting
+modelling applications at the ambitious levels of complexity and scale they desire.
+What We Are Looking For:
+● You have strong experience with transport modelling. This can include road
+transport, public transport, mixed/shared/micro mobility, and span across local,
+national and international transportation systems. We also welcome applications
+from those with broader urban mobility and logistics modelling backgrounds.
+● You are an advocate for model explainability and scientific robustness.
+● Experience with geospatial data is a strong advantage.
+● Familiarity with agent-based modelling approaches is an advantage.
+● Experience across the whole lifecycle of model development, including requirements
+gathering, research, prototyping, implementation, and validation.
+● You have implemented models to high standards of engineering, either by yourself or
+by closely collaborating with engineers
+● Proficiency with Python is required.
+● You have a degree in a STEM subject with a significant mathematical component. A
+PhD is not required but is an advantage
+What You’ll Be Responsible For:
+● Creating scientific models for our solutions, ensuring that customers have the
+functionality they need now and in the future. Conducting literature reviews,
+conceptual modelling and prototyping as well as being hands-on in the process
+of model implementation.
+● Working with delivery teams to interpret technical requirements and formulate them
+into scientifically-defensible products.
+● Delivering prototype and production level implementations of model tooling as
+notebooks and code.
+● Investigating third-party data sources and products, evaluating their applicability and
+assisting in the creation of pipelines to make them available to simulation engines
+and user interfaces.
+● Critically evaluating the results of simulations and presenting these back to key
+stakeholders & decision makers, while adapting your communication style to
+the relevant audience.
+● Telling a story with the data from our products and simulations, remaining pragmatic
+about their limitations and providing a realistic view to colleagues, stakeholders and
+clients of the benefits and risks inherent to data-driven decision making.
+● Spending time with our customers to understand their perspectives and inform their
+thinking as we create new products for defence.
