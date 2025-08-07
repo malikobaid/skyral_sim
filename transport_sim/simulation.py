@@ -66,31 +66,10 @@ def compute_stats(agents):
 
     return stats
 
-
-
 def load_config(path="transport_sim/config.json"):
     """Load simulation parameters from JSON config."""
     with open(path) as f:
         return json.load(f)
-
-
-# def apply_scenario(graph, scenario):
-#     if "add_edge" in scenario:
-#         n1, n2 = scenario["add_edge"]
-#         length = scenario.get("length", 300)
-#
-#         if isinstance(n1, str) and isinstance(n2, str):
-#             if n1 in tram_coords_lookup and n2 in tram_coords_lookup:
-#                 lat1, lon1 = tram_coords_lookup[n1]
-#                 lat2, lon2 = tram_coords_lookup[n2]
-#                 n1_id = ox.distance.nearest_nodes(graph, lon1, lat1)
-#                 n2_id = ox.distance.nearest_nodes(graph, lon2, lat2)
-#
-#                 graph.add_edge(n1_id, n2_id, length=1, tram=True)
-#                 graph.add_edge(n2_id, n1_id, length=1, tram=True)
-#
-#                 return (n1_id, n2_id)  # ✅ Add this
-#     return None, None
 
 def apply_scenario(graph, scenario):
     stops = scenario.get("tram_stops", [])

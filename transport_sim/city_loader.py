@@ -51,68 +51,6 @@ def get_hub_node(G, location_name="Bournemouth Station"):
     node = ox.distance.nearest_nodes(G, coords[1], coords[0])
     return node
 
-# def export_access_map(G, hub_node, access_distances, out_path, tramline_nodes=None):
-#     import numpy as np
-#     import folium
-#
-#     # Get graph centroid for initial map position
-#     xs = [data["x"] for _, data in G.nodes(data=True) if "x" in data]
-#     ys = [data["y"] for _, data in G.nodes(data=True) if "y" in data]
-#     m = folium.Map(location=[np.mean(ys), np.mean(xs)], zoom_start=13)
-#
-#     # Add legend manually using a FloatImage or HTML overlay
-#     legend_html = '''
-#      <div style="position: fixed;
-#                  bottom: 30px; left: 30px; width: 200px; height: 110px;
-#                  background-color: white; z-index:9999; font-size:14px;
-#                  border:2px solid grey; padding: 10px;">
-#      <b>Legend</b><br>
-#      ● <span style="color:blue">Agent (active)</span><br>
-#      ● <span style="color:red">Hub Station</span><br>
-#      <hr style="margin: 5px 0">
-#      <span style="border-left: 4px dashed orange; padding-left: 5px;">Tramline</span>
-#      </div>
-#      '''
-#     m.get_root().html.add_child(folium.Element(legend_html))
-#
-#     # Add agent points with distance popup
-#     for node, dist in access_distances.items():
-#         if node in G:
-#             x, y = G.nodes[node]["x"], G.nodes[node]["y"]
-#             folium.CircleMarker(
-#                 location=[y, x],
-#                 radius=5,
-#                 color="blue",
-#                 fill=True,
-#                 fill_opacity=0.7,
-#                 popup=f"Distance: {dist:.1f} m",
-#             ).add_to(m)
-#
-#     # Add hub marker
-#     hub_x, hub_y = G.nodes[hub_node]["x"], G.nodes[hub_node]["y"]
-#     folium.Marker(
-#         location=[hub_y, hub_x],
-#         icon=folium.Icon(color="red", icon="train", prefix="fa"),
-#         popup="Hub",
-#     ).add_to(m)
-#
-#     # Optional tramline overlay
-#     if tramline_nodes:
-#         n1, n2 = tramline_nodes
-#         if n1 in G and n2 in G:
-#             x1, y1 = G.nodes[n1]["x"], G.nodes[n1]["y"]
-#             x2, y2 = G.nodes[n2]["x"], G.nodes[n2]["y"]
-#
-#             folium.PolyLine(
-#                 [(y1, x1), (y2, x2)],
-#                 color="orange",
-#                 weight=4,
-#                 dash_array="5, 5",
-#                 tooltip="🚋 Proposed Tramline",
-#             ).add_to(m)
-#
-#     m.save(out_path)
-
 def export_access_map(G, hub, distances, out_path, tramline_nodes=None, tramline_names=None):
     import folium
     from folium.plugins import MarkerCluster

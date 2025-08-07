@@ -39,7 +39,7 @@ num_agents = st.number_input("Number of Agents", min_value=10, max_value=1000, s
 
 st.markdown("### 🚶 Agent Type Distribution")
 
-# 🟢 Bournemouth-specific default shares from Centre for Cities
+# Bournemouth-specific default shares from Centre for Cities
 default_drive = 63
 default_cycle = 4
 default_walk = 22
