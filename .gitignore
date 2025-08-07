@@ -24,5 +24,22 @@ build/
 *.log
 .env
 
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# MyPy, coverage, and test output
+.mypy_cache/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
 # Custom local
 core_sim/
+**/core_sim/
+cache/
+**/cache/
